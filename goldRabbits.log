@@ -1,0 +1,42 @@
+fibo(4): 5
+fibo(-1):
+Fibo Map contents:
+0:1
+1:1
+2:2
+3:3
+4:5
+end of Fibo map
+fibo(6): 13
+fibo(-1):
+Fibo Map contents:
+0:1
+1:1
+2:2
+3:3
+4:5
+5:8
+6:13
+end of Fibo map
+fibo(3): 3
+fibo(-1):
+Fibo Map contents:
+0:1
+1:1
+2:2
+3:3
+4:5
+5:8
+6:13
+end of Fibo map
+fibo(0): 1
+fibo(46): overflow error at fib(46):-1323752223
+fibo(9000): -1
+fibo(0): 1
+fibo(45): 1836311903
+fibo(46): overflow error at fib(46):-1323752223
+fibo(47): -1
+
+real	0m0.012s
+user	0m0.004s
+sys	0m0.000s

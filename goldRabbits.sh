@@ -1,0 +1,1 @@
+time (./goldRabbits 4 -1 6 -1 3 -1 monkey 9000 horse 45 47 ) &> goldRabbits.log
