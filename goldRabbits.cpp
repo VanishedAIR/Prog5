@@ -72,9 +72,13 @@ int main(int argc, char *argv[])
             integer result = goldRabbits(n);
             cout << "fibo(" << n << "): " << result << endl;
         }
+        catch (integer n)
+        {
+            cout << "fibo(" << argv[i] << "): overflow error at fib(" << n << "):" << overflow_value << endl;
+        }
         catch (...)
         {
-            cout << "fibo(" << argv[i] << "): " << argv[i] << " is not an integer" << endl;
+            cout << argv[i] << " is not an integer" << endl;
             continue;
         }
     }
