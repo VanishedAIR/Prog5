@@ -14,14 +14,15 @@
 using namespace std;
 
 static map<integer, integer> memoizedMap = {{0, 1}, {1, 1}}; // initialize map with base cases
+static integer overflowAt;                                   // keeping track of when overflow occurs
 
 integer goldRabbits(integer n)
 {
     if (n == -1)
     {
         cout << "Fibo Map contents:" << endl;
-        map<integer, integer>::iterator it = memoizedMap.begin();
-        while (it != memoizedMap.end())
+        map<integer, integer>::iterator it = memoizedMap.begin(); // iterator to traverse the map
+        while (it != memoizedMap.end())                           // while not at end of map
         {
             cout << it->first << ":" << it->second << endl; // first = key, second = value
             ++it;
@@ -36,24 +37,19 @@ integer goldRabbits(integer n)
     }
     // otherwise calculate the value and store it in the map for future use
     integer prev1 = goldRabbits(n - 1);
-    if (prev1 == -1)
-    {
-        return -1;
-    }
     integer prev2 = goldRabbits(n - 2);
-    if (prev2 == -1)
+    // Calculate sum and check for overflow
+    integer res = prev1 + prev2;
+
+    // if addition of 2 pos nums causes neg res => overflow, save position and throw string exception
+    if ((prev1 > 0 && res < prev1) || (prev2 > 0 && res < prev2))
     {
-        return -1;
-    }
-    if (prev1 + prev2 < 0)
-    {
-        cout << "fibo(" << n << "): overflow error at fib(" << n << "):" << prev1 + prev2 << endl;
-        return -1;
+        overflowAt = n; // store position where overflow occurred
+        throw string("overflow");
     }
 
-    integer result = prev1 + prev2;
-    memoizedMap[n] = result;
-    return result;
+    memoizedMap[n] = res;
+    return res;
 }
 
 int main(int argc, char *argv[])
@@ -62,8 +58,13 @@ int main(int argc, char *argv[])
     {
         try
         {
+            if (!isdigit(argv[i][0]) && argv[i][0] != '-') // if not a number or negative sign then error
+            {
+                cout << argv[i] << " is not an integer" << endl;
+                continue;
+            }
             integer n = atoi(argv[i]);
-            if (n == -1)
+            if (n == -1) // if n is -1 then print the map and continue
             {
                 cout << "fibo(-1):" << endl;
                 goldRabbits(n);
@@ -72,14 +73,9 @@ int main(int argc, char *argv[])
             integer result = goldRabbits(n);
             cout << "fibo(" << n << "): " << result << endl;
         }
-        catch (integer n)
+        catch (string s)
         {
-            cout << "fibo(" << argv[i] << "): overflow error at fib(" << n << "):" << overflow_value << endl;
-        }
-        catch (...)
-        {
-            cout << argv[i] << " is not an integer" << endl;
-            continue;
+            cout << "fibo(" << argv[i] << "): overflow error at fib(" << overflowAt << "):" << memoizedMap[overflowAt - 1] + memoizedMap[overflowAt - 2] << endl;
         }
     }
     return 0;

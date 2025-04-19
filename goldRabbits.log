@@ -29,14 +29,12 @@ Fibo Map contents:
 5:8
 6:13
 end of Fibo map
-fibo(0): 1
-fibo(46): overflow error at fib(46):-1323752223
-fibo(9000): -1
-fibo(0): 1
+monkey is not an integer
+fibo(9000): overflow error at fib(46):-1323752223
+horse is not an integer
 fibo(45): 1836311903
-fibo(46): overflow error at fib(46):-1323752223
-fibo(47): -1
+fibo(47): overflow error at fib(46):-1323752223
 
-real	0m0.012s
-user	0m0.004s
-sys	0m0.000s
+real	0m0.013s
+user	0m0.005s
+sys	0m0.001s
